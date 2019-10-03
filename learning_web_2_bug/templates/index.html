@@ -1,0 +1,201 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+{% block title %}index{% endblock %}
+
+{% block content %}
+	<div class="wrap-body">
+		<!--////////////////////////////////////Container-->
+
+			<div class="wrap-container zerogrid">
+				<!-----------------content-box-1-------------------->
+				<section class="content-box box-1 box-image-1">
+					<div class="row wrap-box"><!--Start Box-->
+						
+						<div class="col-1-2">
+							<div class="box-text">
+								<h1><span><strong>岩石裂隙工作组</strong></span>欢迎您！<br></h1>
+								<p class="lead"><strong>Rock Fracture WorkGroup<br>Postive&loving Team!</strong></p>
+							</div>
+						</div>
+						
+					</div>
+				</section>
+			<br>
+				
+				<!-----------------content-box-2-------------------->
+				<section class="content-box box-2">
+					
+					<div class="row wrap-box"><!--Start Box-->
+						<div class="col-1-2">
+							<div class="box-text bg-2">
+								<div class="heading">
+									<h2><a name="introduction"></a>关于我们<br> About Us</h2>
+								</div>
+								<div class="content">
+									<p>岩石裂隙工作组是由中国地质大学（北京）于青春教授所领导的科研工作组，长期关注裂隙岩体、多相流与岩石相互作用研究！</p>
+									<p>我们是一个积极向上，团结友爱的大家庭！</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-1-2">
+							<div class="box-text bg-3">
+								<div class="heading">
+									<h2>于青春教授<br>介绍</h2>
+								</div>
+								<div class="content">
+									<p>中国地质大学（北京）水资源与环境学院教授（博士生导师），2000年于日本京都大学土木工程系获得博士学位，至今已主持多项科研项目及相关软件开发，并编写多本学术专著！</p>
+									<p><a href="{% url 'blog:blog_about' %}" style="color:white">了解更多</a></p>
+								</div>
+							</div>
+						</div>
+						
+					</div>		
+				</section>
+				<br>
+				
+				<!-----------------content-box-4-------------------->
+			
+				<section class="content-box box-4 box-image-2">				
+					<div class="row wrap-box"><!--Start Box-->
+							<div class="col-full">
+
+							{% for image in images %}
+								{% if  n >= forloop.counter   %}
+								<div class="col-1-4 portfolio-box">
+									<a class="" href="{{ image.title.get_url_path }}">
+										<div class="portfolio-image" style="background-image: url('{{image.image.url}}')"></div>
+										
+											<div class="portfolio-caption">
+												<div class="portfolio-time"><a name="archive"></a>
+													{{image.title.article_writer}}
+												</div>
+											
+											<div class="portfolio-details">
+												<div class="portfolio-title">
+													{{ image.title.article_tag.all | join:"," }}
+												</div>
+											</div>									
+										</div>
+								</a>
+							</div>
+							{% endif %}
+						{% endfor %}
+						
+							<div class="col-1-4 portfolio-box">
+								<a class="" href="single.html">
+									<div class="portfolio-image" ><img src="{% static 'images/12.jpg' %}" alt="测试"  ></div>
+									<div class="portfolio-caption">
+										<div class="portfolio-time">
+											<div class="portfolio-day">5</div>
+											<div class="portfolio-month">November</div>
+											<div class="portfolio-year">2016</div>
+										</div>
+										<div class="portfolio-details">
+											<div class="portfolio-title">Listen to Future</div>
+											<div class="portfolio-cat">Music, Single</div>
+											<div class="portfolio-comments"><i class="fa fa-comments"></i>0</div>
+										</div>
+									</div>
+								</a>
+							</div>						
+									<div class="col-1-4 portfolio-box">
+								<a class="" href="single.html">
+									<div class="portfolio-image" ><img src="{% static 'images/12.jpg' %}" alt="测试"  ></div>
+									<div class="portfolio-caption">
+										<div class="portfolio-time">
+											<div class="portfolio-day">5</div>
+											<div class="portfolio-month">November</div>
+											<div class="portfolio-year">2016</div>
+										</div>
+										<div class="portfolio-details">
+											<div class="portfolio-title">Listen to Future</div>
+											<div class="portfolio-cat">Music, Single</div>
+											<div class="portfolio-comments"><i class="fa fa-comments"></i>0</div>
+										</div>
+									</div>
+								</a>
+							</div>	
+														<div class="col-1-4 portfolio-box">
+								<a class="" href="single.html">
+									<div class="portfolio-image" ><img src="{% static 'images/12.jpg' %}" alt="测试"  ></div>
+									<div class="portfolio-caption">
+										<div class="portfolio-time">
+											<div class="portfolio-day">5</div>
+											<div class="portfolio-month">November</div>
+											<div class="portfolio-year">2016</div>
+										</div>
+										<div class="portfolio-details">
+											<div class="portfolio-title">Listen to Future</div>
+											<div class="portfolio-cat">Music, Single</div>
+											<div class="portfolio-comments"><i class="fa fa-comments"></i>0</div>
+										</div>
+									</div>
+								</a>
+							</div>	
+														<div class="col-1-4 portfolio-box">
+								<a class="" href="single.html">
+									<div class="portfolio-image" ><img src="{% static 'images/12.jpg' %}" alt="测试"  ></div>
+									<div class="portfolio-caption">
+										<div class="portfolio-time">
+											<div class="portfolio-day">5</div>
+											<div class="portfolio-month">November</div>
+											<div class="portfolio-year">2016</div>
+										</div>
+										<div class="portfolio-details">
+											<div class="portfolio-title">Listen to Future</div>
+											<div class="portfolio-cat">Music, Single</div>
+											<div class="portfolio-comments"><i class="fa fa-comments"></i>0</div>
+										</div>
+									</div>
+								</a>
+							</div>	
+														<div class="col-1-4 portfolio-box">
+								<a class="" href="single.html">
+									<div class="portfolio-image" ><img src="{% static 'images/12.jpg' %}" alt="测试"  ></div>
+									<div class="portfolio-caption">
+										<div class="portfolio-time">
+											<div class="portfolio-day">5</div>
+											<div class="portfolio-month">November</div>
+											<div class="portfolio-year">2016</div>
+										</div>
+										<div class="portfolio-details">
+											<div class="portfolio-title">Listen to Future</div>
+											<div class="portfolio-cat">Music, Single</div>
+											<div class="portfolio-comments"><i class="fa fa-comments"></i>0</div>
+										</div>
+									</div>
+								</a>
+							</div>	
+														<div class="col-1-4 portfolio-box">
+								<a class="" href="single.html">
+									<div class="portfolio-image" ><img src="{% static 'images/12.jpg' %}" alt="测试"  ></div>
+									<div class="portfolio-caption">
+										<div class="portfolio-time">
+											<div class="portfolio-day">5</div>
+											<div class="portfolio-month">November</div>
+											<div class="portfolio-year">2016</div>
+										</div>
+										<div class="portfolio-details">
+											<div class="portfolio-title">Listen to Future</div>
+											<div class="portfolio-cat">Music, Single</div>
+											<div class="portfolio-comments"><i class="fa fa-comments"></i>0</div>
+										</div>
+									</div>
+								</a>
+							</div>	
+						</div>
+					</div>
+				</section>
+
+			
+		</div>
+	</div>
+
+<script src="{% static 'js/sticky-sidebar.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+
+
+
+{% endblock %}	
+

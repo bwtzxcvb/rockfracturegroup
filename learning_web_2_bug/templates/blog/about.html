@@ -1,0 +1,174 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+{% block title %}about{% endblock %}
+
+{% block content %}
+
+<div class="wrap-body">
+
+		<!--////////////////////////////////////Container-->
+		<section id="container">
+			<div class="wrap-container">
+				<!-----------------Content-Box-------------------->
+				<article class="single-post zerogrid">
+					<div class="row wrap-post"><!--Start Box-->
+						
+						<div class="entry-header">
+							<!--<span class="time">June 8, 2016</span>
+							<h1 class="entry-title">Nulla eget mauris quis elit mollis ornare vitae ut odio augue vitae sollicitudin commodo</h1>
+							<span class="cat-links"><a href="#">ADMIN</a>, <a href="#">LIFESTYLE</a></span>-->
+						</div>
+						
+						<div class="post-thumbnail-wrap">
+							<img src="{% static 'images/yulaoshi.jpg' %}">
+						</div>
+						
+						<div class="entry-content">
+							<div class="excerpt"><p></p></div>
+								<h2>教育经历</h2>
+							<blockquote>
+								<p>1981-1985  本科  中国地质大学（武汉）水文地质工程地质系</p>
+								<p>1985-1988  硕士  中国地质大学（武汉）水文地质工程地质系</p>
+								<p>1996-2000  博士  日本京都大学土木工程系（教育部公派博士)</p>
+								<p>2013.1-2014.5  加州大学伯克利，地质工程与环境系访问学者</p>
+							</blockquote>
+							
+								<h2>工作经历</h2>	
+							<blockquote>
+								<p>1988-1994  助教、讲师  中国地质大学（武汉）水文地质工程地质系</p>
+								<p>1994-1996  副教授（地质矿产部破格），中国地质大学水文地质工程地质系</p>
+								<p>2000-2003  软件工程师，  日本软件工程公司</p>
+								<p> 2003-现在  教授，中国地质大学（北京）水资源与环境学院</p>
+							</blockquote>
+							
+								<h2>学术专著</h2>	
+							<blockquote>
+								<p>《柴达木盆地东部石炭系页岩储渗特征研究》，天津科技出版社，2017</p>
+								<p>《三峡工程地下电站厂房岩石块体研究》，水利水电出版社，2015</p>
+								<p>《裂隙岩体一般块体理论》，水利水电出版社，北京 2007</p>
+								<p>《清江流域岩溶发育及其对资源环境影响效应的研究》，中国地质大学出版社，1996</p>
+								<p>《水文地质学基础》（普通高等教育地质矿产类规划教材，曾获国家级优秀教材奖和地矿部优秀教材奖），地质出版社，1995</p>
+								<p>《矿床水文地质学》，中国地质大学出版社，1993.</p>
+							</blockquote>	
+				
+				
+								<h2 >2013年以来主要国际SCI论文（*=通讯作者）</h2>	
+							<blockquote >
+								<p> Milei Wang（研究生）, Qingchun Yu*，A method to determine the permeability of shales by using the dynamic process data of methane adsorption， Engineering Geology 2019，253：111–122</p>
+								<p>Zhang Cheng（研究生）, Qingchun Yu*,Breakthrough pressure and permeability in partially water-saturated shales using methane–carbon dioxide gas mixtures: An experimental study of Carboniferous shales from the eastern Qaidam Basin,China, AAPG Bulletin 2019，103(2):273-301</p>
+								<p>Yinhe Zheng（研究生）, Lu Xia*, Qingchun Yu, Constructing boundary structures of rock blocks, Int J Numer Anal Methods Geomech. 2019; DOI: 10.1002/nag.2900</p>
+								<p> Yinhe Zheng（研究生）, Lu Xia*, Qingchun Yu, Stability analysis method for rock blocks formed by curved fractures, Tunnelling and Underground Space Technology (2019) 85:182–195</p>
+								<p>Wang Lu（研究生）, Wan, J., Tokunaga, T. K., Kim, Y., Qingchun Yu*. Experimental and modeling study of methane adsorption onto partially saturated shales. Water Resources Research 2018, 54. https://doi.org/10.1029/2017WR020826</p>
+								<p><a href="{% url 'blog:blog_archive' %}"  style="color:black"><strong>近期论文</strong></a></p>								
+								<strong><button type="button" class="btn btn-primary btn-lg bt-block" onclick="ToDetail_1()">主要论文列表</button></strong>
+							</blockquote>
+							
+							
+								<h2>主要科研项目</h2>	
+							<blockquote>
+								<p>《水对岩石孔隙毛细CO2的非平衡溶解过程》，国家自然基金委面上项目2019年1月-2022年12月</p>
+								<p>《岩溶地表水库及其伴生岩溶地下水库的调蓄功能研究》，国家自然科学基金重大研究计划专题.国家自然基金委员会-贵州喀斯特科学研究中心联合基金项目：（喀斯特筑坝河流水安全与调控对策U1612441）专题2017年1月-2021年12月</p>
+								<p>《低渗、超低渗储集岩参数测定与物理模拟技术方法研究》，国土资源公益性行业科研专项，201211063子课题2012年5月至2017年5月</p>
+								<p>《柴达木盆地古生界非常规油气储层与渗流机理研究》，国土资源部资助项目，2013年1月至2016年12月。</p>
+								<p>《柴东石炭系古岩溶发育规律及资源环境意义》，国土资源部资助项目，2013年1月至2016年12月。</p>
+								<P><strong><button type="button" class="btn btn-primary btn-lg bt-block" onclick="ToDetail_2()">主要科研项目列表</button></strong></P>
+							</blockquote>							
+						</div>
+						
+					</div>
+				</article>
+
+			</div>
+		</section>
+
+</div>
+
+<button type="button" id="BackTop" class="toTop-arrow" style="z-index: 100;"></button>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/layer.js' %}"></script>
+
+<script type="text/javascript">
+    function ToDetail_1(){
+        var index=layer.open({
+            type:1,
+            skin:"layui-layer-demo",
+            closeBtn:1,
+            shift:2,
+            title: "2013年以来主要国际SCI论文（*=通讯作者）",           
+            area:["900px","440px"],
+            content: 
+					"<p>1.Zhao Yan（研究生）, Qingchun Yu*, CO2 breakthrough pressure and permeability for unsaturated low-permeability sandstone of the Ordos Basin, Journal of Hydrology 2017, 550: 331-342</p>"+
+					"<p>2.Zhao Yan（研究生）, Qingchun Yu*, Effect of CH4 on the CO2 breakthrough pressure and permeability of partially saturated low-permeability sandstone in the Ordos Basin, China, Journal of Hydrology 2018, 556:732-748</p>"+
+					"<p>3.Wang Milei（研究生）, Qingchun Yu*, Pore structure characterization of Carboniferous shales from the eastern Qaidam Basin, China: Combining helium expansion with low-pressure adsorption and mercury intrusion, Journal of Petroleum Science & Engineering 2017, 152:91-103</p>"+
+					"<p>4.Gao Jun（研究生）, Qingchun Yu*, Xia L., Apparent permeability and gas flow behavior in Carboniferous shale from the Qaidam Basin, China: An experimental study, Transport in Porous Media 2016, 116:585-611</p>"+
+					"<p>5.Zhang Chen（研究生）, Qingchun Yu*, The effect of water saturation on methane breakthrough pressure: An experimental study on the Carboniferous shales from the eastern Qaidam Basin, China 2016, Journal of Hydrology 2016, 543: 832-848</p>"+
+					"<p>6.Wang Lu（研究生）, Qingchun Yu*, The effect of moisture on the methane adsorption capacity of shales: A study case in the eastern Qaidam Basin in China, Journal of Hydrology 2016, 542:487-505</p>"+
+					"<p>7.Lu Xia，Yinhe Zheng，Qingchun Yu*, Estimation of the REV size for blockiness of fractured rock masses, Computers and Geotechnics, 2016, 76：83~92</p>"+
+					"<p>8.Yinhe Zheng（研究生），Lu Xia，Qingchun Yu*, Identifying rock blocks based on exact arithmetic, International Journal of Rock Mechanics & Mining Sciences, 2016, 86：80~90</p>"+
+					"<p>9.Li Yingjie（博士后）, Li X., Wang Y., Yu* Q., Effects of composition and pore structure on the reservoir gas capacity of Carboniferous shale from Qaidam Basin, China, Marine and Petroleum Geology 2015, 62: 44-57</p>"+
+					"<P>10.Zheng Yinhe（研究生），Xia Lu，Yu Qingchun*, Analysis of the removability and stability of rock blocks by considering the rock bridge effect, Canadian Geotechnical Journal, 2015, 53：384~395</P>"+
+					"<p>11.Zheng Yinhe（研究生），Xia Lu，Yu Qingchun*, A method for identifying three-dimensional rock blocks formed by curved fractures, Computer and Geotechnics, 2015, 65(1)：1~11</p>"+
+					"<p>12.Xia Lu，Li Maohua，Chen Youhua，Zheng Yinhe，Yu Qingchun*, Blockiness level of rock mass around underground powerhouse of Three Gorges Project, Tunnelling and Underground Space Technology, 2015, 48：67~76</p>"+
+					"<p>13.Li Yi（研究生），Yu Qingchun*，Wu Aibing，Zhang Cheng，Li Xufeng, The effects of quartz content on the formation of residual water in a brine–CO2–quartz system: An experimental study, Journal of Natural Gas Science and Engineering, 2015, 27：1609~1619</p>"+
+					"<p>14.Wang Lu（研究生），Yu Qingchun*, Methane adsorption on porous nano-silica in the presence of water: An experimental and ab initio study, Journal of Colloid and Interface Science, 2015, 467：60~69</p>"+
+					"<p>15.Chang Chun（研究生），Zhou Quanlin，Guo Jianqiang，Yu Qingchun*, Supercritical CO2 dissolution and mass transfer in low-permeability sandstone: Effect of concentration difference in water-flood experiments, International Journal of Greenhouse Gas Control, 2014, 28：328~342</p>"+
+					"<p>16.Li Yi（研究生），Yu Qingchun*, The effects of brine species on the formation of residual water in a CO2-brine system, Transport in Porous Media, 2014, 104(3)：553~564</p>"+
+					"<p>17.Wang Lu（研究生），Shen Zhaoli，Hu Lisha，Yu Qingchun*, Modeling and measurement of CO2 solubility in salty aqueous solutions and application in the Erdos Basin, Fluid Phase Equilibria, 2014, 377：45~55</p>"+
+					"<p>18.Li Yingjie（博士后），Zhang Dingli，Fang Qian，Yu Qingchun*，Xia Lu, A physical and numerical investigation of the failure mechanism of weak rocks surrounding tunnels, Computer and Geotechnics, 2014, 61：292~307</p>"+
+					"<p>19.Chun Chang（研究生），Quanlin Zhou，Lu Xia，Xiaoyuan Li，Qingchun Yu*, Dynamic displacement and non-equilibrium dissolution of supercritical CO2 in low-permeability sandstone: An experimental study, International Journal of Greenhouse Gas Control, 2013, 14：1~14</p>"+
+					"<p>部分早期论文</p>"+
+					"<p>YU, Q., J. Shen, and Y. Ohnishi. Some investigations on the early organization of karst systems, Journal of China University of Geosciences, 1999， 10 (4), 314-321</p>"+
+					"<p>Yu, Q., Y. Ohnishi, H. Ohtsu, and S. Nishiyama. A planar-channel model for fluid flow in discrete fracture network, Computer Methods and Advances in Geomechanics, Desai et al (eds), Balkema, Rotterdam 2001.1835-1838.</p>"+
+					"<p>Yu, Q., Y. Ohnishi. Analysis system for rock slope key-block，Proceedings of the 11th Symposium of Japanese Rock Mechanics Society, Tokyo, 2002.552-557</p>"+
+					"<p>Ohnishi, Y., Q. YU, H. Ohtsu, and M. Tanaka. Modeling for water flow in discrete fracture network and model calibration, Proceedings of the Symposium for the 20th Anniversary Celebration of the West Japan Rock Engineering Society (edited by K. Matsui and H. Shimada), Fukuoka,1999. 475-482</p>"+
+					"<p>Ohnishi, Y. and Q. YU. 3D block analyses for fractured rock, Computer Methods and Advances in Geomechanics, Desai et al (eds), Balkema, Rotterdam 2001.577-580</p>"
+					
+					
+       });
+    }
+</script>
+
+<script type="text/javascript">
+    function ToDetail_2(){
+        var index=layer.open({
+            type:1,
+            skin:"layui-layer-demo",
+            closeBtn:1,
+            shift:2,
+            title: "主要科研项目列表",           
+            area:["900px","440px"],
+            content: 
+					"<p>《水对岩石孔隙毛细CO2的非平衡溶解过程》，国家自然基金委面上项目2019年1月-2022年12月</p>"+
+					"<p>《岩溶地表水库及其伴生岩溶地下水库的调蓄功能研究》，国家自然科学基金重大研究计划专题.国家自然基金委员会-贵州喀斯特科学研究中心联合基金项目：（喀斯特筑坝河流水安全与调控对策U1612441）专题2017年1月-2021年12月</p>"+
+					"<p>《低渗、超低渗储集岩参数测定与物理模拟技术方法研究》，国土资源公益性行业科研专项，201211063子课题2012年5月至2017年5月</p>"+
+					"<p>《柴达木盆地古生界非常规油气储层与渗流机理研究》，国土资源部资助项目，2013年1月至2016年12月</p>"+
+					"<p>《柴东石炭系古岩溶发育规律及资源环境意义》，国土资源部资助项目，2013年1月至2016年12月</p>"+
+					"<p>《柴达木盆地德令哈断陷地下水渗流场模型》，国土资源部资助项目，2015年1月至2017年12月</p>"+
+					"<p>《单孔压水试验确定岩体非连续裂隙有效隙宽的方法》，国家自然基金委面上项目，2008年1月-2010年12月</p>"+
+					"<p>《裂隙岩体一般块体理论及其应用》，国家自然基金委面上项目，2004年1月-2006年12月</p>"+
+					"<p>《塔里木盆地奥陶系礁灰岩CO2地质储存参数试验研究》，国土资源部资助项目</p>"+
+					"<P>《主要沉积盆地寒武-奥陶系二氧化碳地质储存物理模拟研究》，国土资源部资助项目</P>"+
+					"<p>《全国碳酸盐储层及塔里木盆地二氧化碳地质储存潜力与适宜性评价》，国土资源部资助项目</p>"+
+					"<p>《一般块体理论在三峡地下发电厂房工程的应用》，企业委托·三峡勘测研究院</p>"+
+					"<p>《乌东德坝区岩体裂隙及块体研究》，企业委托·三峡勘测研究院</p>"+
+					"<p>《General Block软件补充开发》，企业委托·三峡勘测研究院</p>"+
+					"<p>《岩体边坡及硐室块体稳定性研究》，企业委托·北京星通联华公司</p>"+
+					"<p>《裂隙岩体块体稳定计算软件研究》，企业委托·北京星通</p>"+
+					"<p>《盐渍地区高等级公路地质病害研究》，企业委托·吉林省交通厅</p>"+
+					"<p>《构皮滩水电工程永久边坡稳定性研究》，企业委托·长江勘测技术研究所</p>"+
+					"<p>三峡船闸岩体裂隙及块体研究，企业委托·三峡勘测研究院</p>"+
+					"<p>三峡工程坝基岩体裂隙模型研究，企业委托·三峡勘测研究院</p>"+
+					"<p>隔河岩坝区岩体溶洞定量预测模型研究·企业委托·三峡勘测研究院</p>"+
+					"<p>岩体渗流及物质迁移数值模型国际对比研究（日本政府资助，京都大学留学期间）</p>"+
+					"<p>日本花岗岩裂隙模型化研究（日本政府资助，京都大学留学期间，参加）</p>"+
+					"<p>非连续裂隙网络渗流及物质迁移的板-管耦合模型（教育部留学回国启动基金）</p>"
+					
+					
+       });
+    }
+</script>
+
+
+
+{% endblock %}	

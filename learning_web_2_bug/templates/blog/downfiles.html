@@ -1,0 +1,83 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+{% block title %}DownFiles{% endblock %}
+
+{% block content %}
+
+<div class="wrap-body">
+
+		<!--////////////////////////////////////Container-->
+		<section id="container">
+			<div class="wrap-container">
+				<!-----------------Content-Box-------------------->
+				<article class="single-post zerogrid">
+					<div class="row wrap-post"><!--Start Box-->
+						
+						<div class="entry-header">
+							<!--<span class="time">June 8, 2016</span>-->
+							<h1 class="entry-title">欢迎下载使用于青春老师开发的相关软件，您可以根据所需对应下载！</h1>
+							<span class="cat-links" style="color:black">欢迎给我们留言交流软件相关问题！</span>
+						</div>
+						
+						<!--<div class="post-thumbnail-wrap">
+							<img src='https://blog-1259637720.cos.ap-beijing.myqcloud.com/image/FractureGenerator.png'>
+							<p>FractureGenerator示意图</p>
+						</div>-->
+						
+						<div class="entry-content">
+							<div class="excerpt"><p></p></div>
+								<h2>FractureGenerator下载</h2>
+							<blockquote>
+								<p><img src='https://blog-1259637720.cos.ap-beijing.myqcloud.com/image/FractureGenerator.png'></p>
+								<center><p><strong>FractureGenerator示意图（下载软件了解，均包含说明书和软件本体）</strong><br></p></center>									
+								<center><p><a href='https://pan.baidu.com/s/1Cg3CoLUjokhA3Lnwb0LvxQ'><strong>百度网盘下载（提取码：abnh）</strong></a><br></p></center>
+								<center><p><a href='{% url "article:download_1" %}'><strong>本地下载</strong></a><br></p></center>																	
+							</blockquote>
+							
+								<h2>FractureGrouping下载</h2>	
+							<blockquote>
+								<p><img src='https://blog-1259637720.cos.ap-beijing.myqcloud.com/image/FractureGrouping.png'></p>
+								<center><p><strong>FractureGrouping示意图（下载软件了解，均包含说明书和软件本体)</strong><br></p></center>		
+								<center><p><a href='https://pan.baidu.com/s/1D77i7ybfUJvGVmt5Cbmf2w'><strong>百度网盘下载（提取码：nsmd）</strong></a><br></p></center>
+								<center><p><a href='{% url "article:download_2" %}'><strong>本地下载</strong></a><br></p></center>										
+							</blockquote>
+							
+								<h2>GeneralBlock下载</h2>	
+							<blockquote>
+								<center><p><img src='https://blog-1259637720.cos.ap-beijing.myqcloud.com/image/GeneralBlock.png'></p></center>
+								<center><p><strong>GeneralBlock示意图（下载软件了解，均包含说明书和软件本体，具体可见《裂隙岩体一般块体理论》)</strong><br></p></center>
+								<center><p><a href='https://pan.baidu.com/s/11RL548ST0ggBymY_XusW1A'><strong>百度网盘下载（提取码：obeq）</strong></a><br></p></center>
+								<center><p><a href='{% url "article:download_3" %}'><strong>本地下载</strong></a><br></p></center>		
+							</blockquote>	
+				
+				
+								<h2 >JointOky下载</h2>	
+							<blockquote >
+								<center><p><img src='https://blog-1259637720.cos.ap-beijing.myqcloud.com/image/JointOky.jpg'></p></center>
+								<center><p><strong>JointOky示意图（下载软件了解，均包含说明书和软件本体)</strong><br></p></center>
+								<center><p><a href='https://pan.baidu.com/s/13hlpFnolao5sIsE3ygjPMA'><strong>百度网盘下载（提取码：xeis）</strong></a><br></p></center>
+								<center><p><a href='{% url "article:download_4" %}'><strong>本地下载</strong></a><br></p></center>
+							</blockquote>
+							
+							
+								<h2>SlopeBlock下载</h2>	
+							<blockquote>
+								<center><p><img src='https://blog-1259637720.cos.ap-beijing.myqcloud.com/image/SlopeBlock.png'></p></center>
+								<center><p><strong>SlopeBlock示意图（下载软件了解，均包含说明书和软件本体)</strong><br></p></center>
+								<center><p><a href='https://pan.baidu.com/s/1epxSVAoKHqZkr-QdZWehEg'><strong>百度网盘下载（提取码：xep5）</strong></a><br></p></center>
+								<center><p><a href='{% url "article:download_5" %}'><strong>本地下载</strong></a><br></p></center>
+							</blockquote>							
+						</div>
+						
+					</div>
+				</article>
+
+			</div>
+		</section>
+
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/layer.js' %}"></script>
+
+{% endblock %}	

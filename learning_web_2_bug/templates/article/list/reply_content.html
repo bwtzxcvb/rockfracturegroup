@@ -1,0 +1,72 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head> 
+    
+<meta charset="utf-8"> 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head> 
+
+<body>
+    <form action="."  method="post"  class="form-hrizontal"   role="form">
+
+        <div class="form-group">
+            <div class="col-sm-10" >
+                {{ comment_form.media }}
+                {{ comment_form.body }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10" >
+            <input type="button" class="btn btn-primary btn-lg" value="发布评论" onclick="publish_comment_re()">
+            </div>
+        </div>
+</form>
+
+
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'editor/lib/marked.min.js' %}"></script>
+<script src="{% static 'editor/lib/prettify.min.js' %}"></script>
+<script src="{% static 'editor/lib/raphael.min.js' %}"></script>
+<script src="{% static 'editor/lib/underscore.min.js' %}"></script>
+<script src="{% static 'editor/lib/sequence-diagram.min.js' %}"></script>
+<script src="{% static 'editor/lib/flowchart.min.js' %}"></script>
+<script src="{% static 'editor/lib/jquery.flowchart.min.js' %}"></script>
+<script src="{% static 'editor/editormd.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+
+
+<script type="text/javascript">
+    function publish_comment_re(){
+        let body = CKEDITOR.instances['id_body'].getData();
+        $.ajax({
+            url: "{% url 'article:re_comment' id slug get_nodeid %}",
+            type: "POST",
+            data: {"body":body},
+            success: function(e){
+                if(e=="5"){
+                    layer.msg("successful");
+                    parent.loaction.reload();
+                    window.location.reload();
+                }else{
+                    layer.msg("default");
+                    parent.loaction.reload();
+                    window.location.reload();
+                }
+            },
+        });
+    }            
+</script>
+
+</body>
+</html>
+
+
+
+
+
+

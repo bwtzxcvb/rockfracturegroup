@@ -1,0 +1,75 @@
+{% extends "article/base.html" %}
+{% load staticfiles %}
+{% block title %} article column{% endblock %}
+
+{% block content %}
+    <div style="margin-left:10px">
+        <form class="form-horizontal" action="." method="POST">
+            {% csrf_token %}  
+            <div class="row" style="margin-top:10px;">
+                <div class="col-md-2 text-right"><span>对应文章：</span></div>
+                <div class="col-md-10 text-left">
+                    <select id="which_articleid">
+                        {% for article_title in article_titles %}
+                            <option value="{{ article_title.id }}">{{ article_title.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+				</div>
+			</div>
+			
+            <div class="row" style="margin-top:10px;">
+                <div class="col-md-2 text-right"><span>标题：</span></div>
+                <div class="col-md-10 text-left">{{ image_post_form.name }}</div>
+            </div>				
+
+            <div class="row" style="margin-top:10px;">
+                <div class="col-md-2 text-right"><span>地址URL:</span></div>
+                <div class="col-md-10 text-left">{{ image_post_form.url }}</div>
+            </div>	
+         
+            <div class="row" style="margin-top:10px;">
+                <div class="col-md-2 text-right"><span>描述：</span></div>
+                <div class="col-md-10 text-left">{{ image_post_form.description }}</div>
+            </div>	   
+     
+            <div class="row" >
+                <input type="button" class="btn btn-primary btn-lg" value="发布" onclick="image_upload()">
+            </div> 
+        </form>
+        </div>
+    
+
+
+    
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script type="text/javascript" src="{% static 'editor/editormd.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/json2.js' %}"></script>
+
+<script type="text/javascript">
+    function image_upload(){
+        var image_articleid = $("#which_articleid").val();
+		var name = $("#id_name").val();
+        var image_url = $("#id_url").val();
+        var image_description = $("#id_description").val();
+                $.ajax({
+                    url:"{% url 'image:upload_image' %}",
+                    type:"POST",
+                    data:{"name":name, "url":image_url, "description":image_description, "image_articleid":image_articleid},
+                    success:function(e){
+						var status = e['status']
+                        if(status=="0"){
+							layer.msg("正确");
+							window.location.reload();	
+                        }else if(status=="1"){
+							layer.msg("错误");                 
+                        }else{
+                            layer.msg("图片无法上传，请更换图片！");
+                        }						
+                    },
+                });
+            }
+</script>
+
+{% endblock %}

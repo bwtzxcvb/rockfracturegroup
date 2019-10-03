@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %} blog titles{% endblock %}
+
+{% block content %}
+
+<center><h1>{{ blog.title }}</h1></center>
+	<p class="text-center"><span>{{ blog.author.username }}</span>
+		<span style="magrin-left:20px">{{ publish }}</span>
+	</p>
+	<div>{{ blog.body }}</div>
+	
+	<div style="text-align:center;" class="mt-4">
+		<button class="btn btn-outline-danger"
+				type="button"
+				onclick="validate_is_like({{ blog.id }}, {{ blog.likes }})">
+			<span>点赞</span>
+			<span>
+				<i id="toheart" class="fa fa-heart-o fa-lg "></i>
+			</span>
+			<span id="likes_number">
+				{{ article.likes }}
+			</span>
+		</button>
+	</div>
+
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+
+	
+	
+<script type="text/javascript">
+	var flag = true;
+	function validate_is_like(id, likes){
+		if (flag){
+			flag = false;		
+			$.ajax({
+				url: "{% url 'blog:increase_likes' %}",
+				type: "POST",
+				data: {"id":id},
+				success: function(result){
+					if (result === 'success'){
+						layer.msg("感谢点赞！");
+						$('span#likes_number').text(likes + 1).css('color', '#dc3545');
+						$('#toheart').removeClass("fa fa-heart-o fa-lg");
+						$('#toheart').addClass("fa fa-heart fa-lg").css('color', '#ff6b6b')
+						} else {
+							layer.msg("错误？");
+							}
+						}
+					});
+		} else {
+			layer.msg("请勿重复点赞，谢谢！");
+				}	
+	}			
+</script>
+	
+</script>
+
+{% endblock %}

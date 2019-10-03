@@ -1,0 +1,33 @@
+<div class="bg-info">
+    <div class="text-center" style="margin-top:5px;">
+		<p>论文</p>
+        <p><a href="{% url 'article:article_column' %}">栏目管理</a></p>
+        <p><a href="{% url 'article:article_post' %}">发布论文</a></p>
+        <p><a href="{% url 'article:article_list' %}">文章列表</a></p>
+        <p><a href="{% url 'article:article_tag' %}">文章标签</a></p>
+    </div>
+	<hr>
+	
+    <div class="text-center" style="margin-top:5px;">
+		<p>新闻管理</p>
+        <p><a href="{% url 'news:news_column' %}">栏目管理</a></p>
+        <p><a href="{% url 'news:news_post' %}">发布新闻</a></p>
+        <p><a href="{% url 'news:news_list' %}">新闻列表</a></p>
+        <p><a href="{% url 'news:news_tags' %}">新闻标签</a></p>
+    </div>
+    <hr>
+    
+    <div class="text-center" style="margin-top:5px;">
+		<p>图片管理</p>
+        <p><a href="{% url 'image:list_images' %}">图片管理</a></p>
+        <p><a href="{% url 'image:upload_image' %}">发布照片</a></p>
+    </div>
+    <hr>    
+
+    <div class="text-center" style="margin-top:5px;">
+		<p>PDF管理</p>
+        <p><a href="{% url 'pdf:list_pdfs' %}">PDF管理</a></p>
+        <p><a href="{% url 'pdf:upload_pdf' %}">发布PDF</a></p>        
+    </div>       
+    
+</div>

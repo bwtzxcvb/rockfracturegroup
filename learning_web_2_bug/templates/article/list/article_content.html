@@ -1,0 +1,323 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load article_tags %}
+{% block title %}articles detail{% endblock %}
+{% include "paginator.html" %}
+{% block content %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+{% with total_likes=article.users_like.count users_like=article.users_like.all %}
+
+<section class="sec-wrapper">   
+    <section class="main-section">  
+        <div class="div-wrapper clearfix">
+            <div class="cont-left">
+<div class="container">
+<div class="col-md-9">
+    <header>
+        <h1>{{ article.title }}</h1>
+        <p>
+            <a href="{% url 'article:author_articles' article.author.username %}">
+                {{ article.author.username }}
+            </a>
+            <span style="margin-left:20px" class="glyphicon glyphicon-thumbs-up">{{ total_likes }}人点赞</span>
+            <span style="margin-left:20px" >{{ total_views }}次查看</span>
+        </p>
+        <p><span style="margin-right:10px"><strong>标签：</strong></span>
+            {{ article.article_tag.all | join:"," }}
+        </p>
+    </header>
+    
+	<link rel="stylesheet" href="{% static 'editor/css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'editor/css/editormd.css' %}">    
+	<link rel="stylesheet" href="{% static 'editor/css/editormd.preveiw.css' %}" />
+    <div id="editormd-view">
+<textarea style="display:none;">
+{{ article.body }}
+    </textarea>
+    </div>
+
+
+<div>
+    <p class="text-center">
+        <a onclick="like_article({{article.id}},'like')"  href="#">
+            <span class="glyphicon glyphicon-thumbs-up">like</span>
+        </a>
+        <a onclick="like_article({{article.id}},'unlike')"  href="#" >
+            <span style="margin-left:15px;" class="glyphicon glyphicon-thumbs-down">unlike</span>
+        </a>
+    </p>
+</div>
+<div>
+    <p class="text-center"><strong>点赞本文</strong></p>
+    {% for user in article.users_like.all %}
+        <p class="text-center">{{ user.username }}</p>
+    {% empty %}
+    <p class="text-center">还没人对此文章进行表态</p>
+    {% endfor %}
+</div>
+<hr>
+<div>
+    {% load mptt_tags %}
+   <h3><span class="glyphicon glyphicon-bullhorn"></span>本文有{{ comments_list.count }}条评论</h3>
+   <div class="row">
+       {% recursetree comments_list %}
+            {% with comment=node %}
+            {% if comment.parent_id is Null %}
+                <div class="{% if comment.rely_to %}
+                            offset-1 col-11
+                            {% else %}
+                            col-12
+                            {% endif %}">
+                    <hr>
+                    <p>
+
+                        <strong style="color:pink">
+                        {{ comment.commentator }}
+                        </strong>
+                        <div>{{ comment.body|safe }}</div>
+                        {% for recomment in comments_list %}
+                            {% if recomment.parent_id == comment.id %}
+                                    <ul>
+                                        <li style="color:blue">回复者：{{ recomment.commentator }} </li>
+                                         <li>回复内容：{{ recomment.body|safe}}</li>
+                                    </ul>
+
+                            {% endif %}
+                        {% endfor %}
+                            
+                    </p>
+                    
+
+                    
+                    <div>
+                        <span style="color:grey">
+                            {{ comment.created|date:"Y-m-d H:i" }}
+                        </span>
+                    
+                    
+                    <button type="button" class="btn btn-light btn-sm text-muted"   data-toggle="modal" data-target="#comment_{{ comment.get_nodeid }}"  >
+                        回复
+                    </button>
+                    </div>
+                    
+                    <div class="modal fade" id="comment_{{ comment.get_nodeid }}"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="height: 480px">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle" >回复 {{ comment.commentator }}: </a></h5>
+                                </div>
+                                <div class="modal-body" id="modal_body">
+                                    <iframe src="{% url 'article:re_comment' article.id article.slug comment.get_nodeid %}" id="changeiframe" frameborder="0" style="width:100%; height:100%;" scrolling="yes">
+                                    
+                                    </iframe>
+
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    
+                        {% if not comment.is_leaf_node %}
+                            <div class="children">
+                                {{ children }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    {% endif %}
+                {% endwith %}
+                
+            {% endrecursetree %}
+                   <!--{% include "paginator.html" %}-->
+        </div>
+        
+    <form action="."  method="post"  class="form-hrizontal"   role="form">
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label">评论</label>
+            <div class="col-sm-10"  >
+                {{ comment_form.media }}
+                {{ comment_form.body }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10" >
+            <input type="button" class="btn btn-primary btn-lg" value="发布评论" onclick="publish_comment()">
+            </div>
+        </div>
+    </form>
+        <a href='{% url "article:download_1" %}'><strong>点击下载</strong></a><br>
+</div>
+
+<form>
+<input type="button" value="打开窗口" onclick="detail({{article.id}})">
+</form>
+
+
+</div>
+</div>
+
+
+
+
+<!--<div class="col-md-3">
+<p class="text-center"><h3>最受欢迎的文章</h3></p>
+
+<ol>
+    {% for article_rank in most_viewed %}
+    <li>
+        <a href="{{article_rank.get_url_path}}">{{ article_rank.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+<hr>
+
+<p class="text-center"><h3>最新文章</h3></p>
+{% latest_articles  %}
+<hr>
+
+<p class="text-center"><h3>最多评论文章</h3></p>
+{% most_commented_articles as most_comments %}
+<ul>
+    {% for comment_article in most_comments %}
+    <li>
+        <a href="{{comment_article.get_url_path}}">{{ comment_article.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<p class="text-center"><h3>推荐相似文章</h3></p>
+    {% for similar in similar_articles %}
+        <p><a href="{{similar.get_url_path}}">{{ similar.title }}</a></p>
+    {% empty %}
+        <p>Sorry,没有相似文章！</p>
+    {% endfor %}
+</div>-->
+
+            <div class="list-right">
+                <div class="box-fixed">新闻列表</div>
+            </div>
+        </div>
+    </section>
+</section>
+
+
+
+
+
+
+
+
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'editor/lib/marked.min.js' %}"></script>
+<script src="{% static 'editor/lib/prettify.min.js' %}"></script>
+<script src="{% static 'editor/lib/raphael.min.js' %}"></script>
+<script src="{% static 'editor/lib/underscore.min.js' %}"></script>
+<script src="{% static 'editor/lib/sequence-diagram.min.js' %}"></script>
+<script src="{% static 'editor/lib/flowchart.min.js' %}"></script>
+<script src="{% static 'editor/lib/jquery.flowchart.min.js' %}"></script>
+<script src="{% static 'editor/editormd.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+<script src="{% static 'js/jquery.sticky-sidebar.js' %}"></script>
+
+
+
+
+<script type="text/javascript">
+    $(function(){
+        editormd.markdownToHTML("editormd-view",{
+        htmlDecode : "style,script,iframe",
+        emoji : true,
+        taskList : true,
+        tex : true,
+        flowChart : true,
+        sequenceDiagram : true,
+        });
+    });
+
+</script>
+
+<script>
+    function like_article(id,action){
+        $.ajax({
+            url: "{% url 'article:like_article' %}",
+            type: "POST",
+            data: {"id":id, "action":action},
+            success: function(e){
+                if(e=="1"){
+                    layer.msg("感谢点赞");
+                    window.location.reload();
+                }else if(e=="2"){
+                    layer.msg("我们会继续努力");
+                    window.location.reload();
+                }else{
+                    layer.msg("请先登录");
+                }
+        },
+    });
+}
+</script>
+
+<script type="text/javascript">
+    function publish_comment(){
+        let body = CKEDITOR.instances['id_body'].getData();
+        $.ajax({
+            url: "{% url 'article:article_content' article.id article.slug %}",
+            type: "POST",
+            data: {"body":body},
+            success: function(e){
+                if(e=="5"){
+                    layer.msg("successful");
+                    window.location.reload();
+                }else{
+                    layer.msg("default");
+                    window.loation.reload();
+                }
+            },
+        });
+    }            
+</script>
+
+<script>
+	var uri_base="http://127.0.0.1:8000/static/PDFjs/web/viewer.html"
+    function detail(id) {
+        var uri="?file=../../PDFjs/pdfdocument/09TE.pdf";
+        window.open(uri_base+uri)
+    }
+</script>
+<!---<script>
+    function load_modal(id, comment.article.slug, ){
+        var modal_body = '#modal_body_' + comment.get_nodeid;
+        let data-target = '#comment_' + comment.get_nodeid;
+        
+        if($(modal_body).children().length === 0){
+            let content = '<iframe src="/article/article-content/'+
+                id +
+                '/'+
+                slug +
+                '/' +
+                comment_id +
+                '"'+
+                ' frameborder="0" style="width: 100%; height:100%;" id="iframe_'+comment_id+'"></iframe>';
+                $(modal_body).append(content);
+            };
+            
+            $(modal_id).modal('show');
+    }
+</script>--->
+
+
+<!---<script type="text/javascript">
+document.getElementById('changeiframe').src="http://127.0.0.1:8000/home";
+</script>-->
+
+{% endwith %}
+{% endblock %}

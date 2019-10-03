@@ -1,0 +1,207 @@
+{% extends "base2.html" %}
+
+{% load staticfiles %}
+{% load article_tags %}
+{% block title %}article{% endblock %}	
+
+{% block content %}
+
+<div class="wrap-body">
+
+	<article class="single-post zerogrid">
+
+				<div class="entry-header">
+					<h1 class="entry-title">{{ article.title }}</h1>					
+				</div>
+						
+				<div class="entry-content">
+					<div id="editormd-view">
+						<textarea style="display:none;">
+{{ article.body }}
+						</textarea>
+					</div>	
+
+				</div>
+						
+				<div class="entry-content">
+															
+				</div>
+
+
+	
+			<div  class="entry-content" style=" font-size: 21px">
+
+				<center><div style="font-size: 15px">本文已查看<strong style="color:red">{{ total_views }}</strong>次</div></center>						
+				<center>
+					<button type="button" class="button button-skin" onclick="detail('{{pdf.pdf}}')" ><span style="font-size: 15px">论文详情</span></button>
+				</center>				
+				
+				<center>
+					<button class="button button-skin" type="button"  onclick="validate_is_like({{article.id }}, {{ article.person_likes }})">	
+					<span style="font-size: 15px">点赞</span>
+					<span>
+						<i id="toheart" class="fa fa-heart-o fa-lg "></i>
+					</span>
+					<span id="likes_number">
+						{{ article.person_likes }}
+					</span>
+					</button>
+			  </center>	
+																			
+			</div>
+
+
+
+
+	</article>
+
+		
+	
+</div>
+
+
+<button type="button" id="BackTop" class="toTop-arrow" style="z-index: 100;"></button>
+<button type="button" id="BackTop-1" class="toTop-arrow-1 fa fa-camera-retro fa-lg" style="z-index: 100; color: orange"></button>
+<button type="button" id="BackTop-2" class="toTop-arrow-2 fa fa-camera-retro fa-lg" style="z-index: 100; color: orange"></button>
+<button type="button" id="BackTop-3" class="toTop-arrow-3 fa fa-camera-retro fa-lg" style="z-index: 100; color:orange"></button>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'editor/lib/marked.min.js' %}"></script>
+<script src="{% static 'editor/lib/prettify.min.js' %}"></script>
+<script src="{% static 'editor/lib/raphael.min.js' %}"></script>
+<script src="{% static 'editor/lib/underscore.min.js' %}"></script>
+<script src="{% static 'editor/lib/sequence-diagram.min.js' %}"></script>
+<script src="{% static 'editor/lib/flowchart.min.js' %}"></script>
+<script src="{% static 'editor/lib/jquery.flowchart.min.js' %}"></script>
+<script src="{% static 'editor/editormd.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+	$(function(){
+		editormd.markdownToHTML("editormd-view",{
+        htmlDecode : "style,script,iframe",
+        emoji : true,
+        tasklist : true,
+        tex : true,
+        flowChart : true,
+        sequenceDiagram : true,
+        });
+    });
+
+</script>
+
+
+<script>
+    // 其他信息-1
+    $(function () {
+        $('#BackTop-1').click(function () {
+			$(window).attr('location','{{article_rank.get_url_path}}')
+        });
+        $(window).scroll(function () {
+            $('#BackTop-1').fadeIn(0);    
+	            }).scroll();   
+    });
+</script>
+
+<script>
+	$(function () {
+        $('#BackTop-1').hover(function(){
+			$('#BackTop-1').removeClass("fa fa-camera-retro fa-lg")
+			$('#BackTop-1').text('最热');
+		},function(){
+			$('#BackTop-1').text('');
+			$('#BackTop-1').addClass("fa fa-camera-retro fa-lg");
+	   });
+	});
+</script>
+
+<script>
+    // 其他信息-2
+    $(function () {
+        $('#BackTop-2').click(function () {
+			$(window).attr('location','{{latest_article.get_url_path}}')
+        });
+        $(window).scroll(function () {
+            $('#BackTop-2').fadeIn(0);    
+	            }).scroll();   
+    });
+</script>
+
+<script>
+	$(function () {
+        $('#BackTop-2').hover(function(){
+			$('#BackTop-2').removeClass("fa fa-camera-retro fa-lg")
+			$('#BackTop-2').text('最新');
+		},function(){
+			$('#BackTop-2').text('');
+			$('#BackTop-2').addClass("fa fa-camera-retro fa-lg");
+	   });
+	});
+</script>
+
+<script>
+    // 其他信息-3
+    $(function () {
+        $('#BackTop-3').click(function () {
+			$(window).attr('location','{{similar_article.get_url_path}}')
+        });
+        $(window).scroll(function () {
+            $('#BackTop-3').fadeIn(0);    
+	            }).scroll();   
+    });
+</script>
+
+<script>
+	$(function () {
+        $('#BackTop-3').hover(function(){
+			$('#BackTop-3').removeClass("fa fa-camera-retro fa-lg")
+			$('#BackTop-3').text('相似');
+		},function(){
+			$('#BackTop-3').text('');
+			$('#BackTop-3').addClass("fa fa-camera-retro fa-lg");
+	   });
+	});
+</script>
+
+<script type="text/javascript">
+	var flag = true;
+	function validate_is_like(id, likes){
+		if (flag){
+			flag = false;		
+			$.ajax({
+				url: "{% url 'blog:increase_likes' %}",
+				type: "POST",
+				data: {"id":id},
+				success: function(result){
+					if (result === 'success'){
+						layer.msg("感谢点赞！");
+						$('span#likes_number').text(likes + 1).css('color', '#dc3545');
+						$('#toheart').removeClass("fa fa-heart-o fa-lg");
+						$('#toheart').addClass("fa fa-heart fa-lg").css('color', '#ff6b6b')
+						} else {
+							layer.msg("错误？");
+							}
+						}
+					});
+		} else {
+			layer.msg("请勿重复点赞，谢谢！");
+				}	
+	}			
+</script>
+
+
+<script type="text/javascript">
+	var uri_base="http://127.0.0.1:8000/static/PDFjs/web/viewer.html";
+	var pdf={{pdf.name}};
+    function detail(test){
+        var uri="?file=../../../media/"+test;
+        window.open(uri_base+uri)
+    }
+</script>
+
+{% endblock %}	
+

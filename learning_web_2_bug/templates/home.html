@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}articles list{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    
+    <link rel="stylesheet" href="{% static 'editor/css/editormd.preveiw.css' %}">
+    <div id="editormd-view">
+        <textarea id="append-text" style="display:none;">
+##<center>**岩体裂隙工作组欢迎您！**</center>  
+   **岩体裂隙工作组**介绍xxxxxxx
+
+        </textarea>
+    </div>
+    <a class="btn btn-primary btn-large" href="{% url 'blog:blog_title' %}">了解详情</a>
+</div>
+
+			<div class="carousel slide" id="carousel-274107">
+				<ol class="carousel-indicators">
+					<li class="active" data-slide-to="0" data-target="#carousel-274107">
+					</li>
+					<li data-slide-to="1" data-target="#carousel-274107">
+					</li>
+					<li data-slide-to="2" data-target="#carousel-274107">
+					</li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="item active">
+						<img alt="" src="{% static '/images/1.jpg' %}" onclick="javascript:location.href=&quot{% url 'blog:blog_title' %}&quot">
+						<div class="carousel-caption">
+							<h4>
+								第一标签
+							</h4>
+							<p>
+								第一标签的介绍
+							</p>
+						</div>
+					</div>
+					<div class="item">
+						<img alt="" src="{% static '/images/default2.jpg' %}" onclick="javascript:location.href=&quot{% url 'article:article_content' id=2 slug='Ni-Hao-Shi-Jie' %}&quot">
+						<div class="carousel-caption">
+							<h4>
+								第二标签
+							</h4>
+							<p>
+								第二标签介绍
+							</p>
+						</div>
+					</div>
+					<div class="item">
+						<img alt="" src="{% static '/images/default1.jpg' %}">
+						<div class="carousel-caption">
+							<h4>
+								第三标签
+							</h4>
+							<p>
+								第三标签介绍
+							</p>
+						</div>
+					</div>
+				</div> <a class="left carousel-control" href="#carousel-274107" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-274107" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'editor/lib/marked.min.js' %}"></script>
+<script src="{% static 'editor/lib/prettify.min.js' %}"></script>
+<script src="{% static 'editor/lib/raphael.min.js' %}"></script>
+<script src="{% static 'editor/lib/underscore.min.js' %}"></script>
+<script src="{% static 'editor/lib/sequence-diagram.min.js' %}"></script>
+<script src="{% static 'editor/lib/flowchart.min.js' %}"></script>
+<script src="{% static 'editor/lib/jquery.flowchart.min.js' %}"></script>
+<script src="{% static 'editor/editormd.js' %}"></script>
+
+<script type="text/javascript">
+    $(function(){
+        editormd.markdownToHTML("editormd-view",{
+        htmlDecode : "style,script,iframe",
+        emoji : true,
+        tasklist : true,
+        tex : true,
+        flowChart : true,
+        sequenceDiagram : true,
+        });
+    });
+</script>
+
+<script>
+	var uri="?file=rock_f.pdf";
+	var uri_base="http://127.0.0.1:8000/static/js/PDFshow/web/viewer.html"
+    function detail() {
+        window.open(uri_base+uri)
+    }
+</script>
+
+
+{% endblock %}
+

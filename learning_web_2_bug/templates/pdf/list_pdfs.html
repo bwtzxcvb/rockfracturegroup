@@ -1,0 +1,117 @@
+{% extends "article/base.html" %}
+{% load thumbnail %}
+{% load staticfiles %}
+{% block title %}pdfs{% endblock %}
+
+{% block content %}
+<div>
+	<button type="button" class="btn btn-primary btn-lg bt-block" onclick="addPdf()">添加PDF文件</button>
+	<div style="margin-top:10px">
+    <table class="table table-hover">
+        <tr>
+            <td>序号</td>
+            <td>标题</td>
+            <td>描述</td>
+            <td>操作</td>
+        </tr>
+        {% for pdf in pdfs %}
+            <tr >
+                <td>{{ forloop.counter }}</td>
+                <td>{{ pdf.title }}</td>                        
+                <td>{{ pdf.description }}</td>          
+                <td>
+                    <a name="delete" href="javascript:" onclick="del_pdf(this,{{ pdf.id }})">
+                        <span class="glyphicon glyphicon-trash" style="margin-left:20px;"></span>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <p>还没有PDf文件，请点击按钮添加！</p>
+        {% endfor %}
+    </table>
+	</div>
+    {% include "paginator.html" %}
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/layer.js' %}"></script>
+<script type="text/javascript">
+    function addPdf(){
+        var index=layer.open({
+            type:1,
+            skin:"layui-layer-demo",
+            closeBtn:1,
+            shift:2,
+            shadeClose:true,
+            title: "Add Pdf",           
+            area:["600px","440px"],
+            content: "<div style='padding:20px'>"+
+						"<p>请新增扩展名为.pdf的网上Pdf文件地址</p>"+
+						"<form><div class='form-group'>"+
+							"<label for='pdftitle' class='col-sm-2 control-label'>标题</label>"+
+							"<div class='col-sm-10'><input id='pdftitle' type='text' class='form-control' style='margin-bottom:5px'></div></div>"+
+							"<div class='form-group'>"+
+								"<label for='pdfurl' class='col-sm-2 control-label'>地址</label>"+
+								"<div class='col-sm-10'><input id='pdfurl' style='margin-bottom:5px' type='text' class='form-control'></div></div>"+
+								"<div class='form-group'>"+
+									"<label for='description' class='col-sm-2' control-label'>描述</label><div class='col-sm-10'>"+
+										"<textarea class='form-control' style='margin-bottom:5px' row='2' id='pdfdescription'></textarea></div></div>"+
+										"<div class='form-group'><div class='col-sm-offset-2 col-sm-10'>"+
+											"<input id='newpdf' type='button' class='btn btn-default' value='Add It'></div></div></form></div>",
+            success: function(){
+				$("#newpdf").on('click', function(){
+					var title = $("#pdftitle").val();
+					var url = $("#pdfurl").val();
+					var description = $("#pdfdescription").val();
+					var pdf = {"title":title, "url":url, "description":description};
+                $.ajax({
+                    url: '{% url "pdf:upload_pdf" %}',
+                    type: 'POST',
+                    data: pdf,
+                    success: function(e){
+						var status = e['status']
+                        if(status=="1"){
+                            layer.close(index);
+                            window.location.reload();                                                   
+                        }else{
+                            layer.msg("文件无法上传，请更换图片！");
+                        }
+                },
+               });
+            });
+        },
+       });
+    }
+</script>
+
+<script type="text/javascript">
+	function del_pdf(the, pdf_id){
+		var pdf_title = $(the).parents("tr").children("td").eq(1).text();
+		layer.open({
+			type: 1,
+			skin: "layui-layer-rim",
+			area: ["400px", "200px"],
+			title: "删除文件",
+			content: '<div class="text-center" style="margin-top:20px"><p>是否确定删除《'+pdf_title+'》</p></div>',
+			btn:['确定','取消'],
+			yes: function(){
+				$.ajax({
+					url:'{% url "pdf:del_pdf" %}',
+					type:"POST",
+					data:{'pdf_id':pdf_id},
+					success:function(e){
+						var status = e['status']
+						if(status=="1"){
+							parent.location.reload();
+							layer.msg("已经删除");
+						}else{
+							layer.msg("删除失败");
+						}
+					},
+				})
+			},
+		});
+	}
+</script>	
+
+{% endblock %}

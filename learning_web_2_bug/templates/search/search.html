@@ -1,0 +1,46 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+{% load highlight %}
+{% block title %}Search{% endblock %}
+
+{% block content %}
+
+
+<div class="wrap-body">
+	
+
+				<article class="single-post zerogrid">
+					<div class="row wrap-post"><!--Start Box-->
+						
+						<div class="entry-content">
+								<h2>Search Results</h2>
+								<div class="entry-content" style="height:500px">
+								{% if query %}
+
+									{% for result in page.object_list %}
+
+											<div class="entry-header"><h3><a href="{{ result.object.get_absolute_url }}">{% highlight result.object.title with query %}</a></h3></div>
+											<a href="{{ result.object.get_absolute_url }}">{% highlight result.object.body with query [max_length 10]%}</a><hr>        
+
+									{% empty %}
+											<center><p ><strong>No results found.</strong></p></center>
+									{% endfor %}
+								</div>
+									{% if page.has_previous or page.has_next %}
+										<center><div>
+											{% if page.has_previous %}<a href="?q={{ query }}&page={{ page.previous_page_number }}">{% endif %}« 前一页{% if page.has_previous %}</a>{% endif %}
+											{% if page.has_next %}<a href="?q={{ query }}&page={{ page.next_page_number }}">{% endif %}后一页 »{% if page.has_next %}</a>{% endif %}
+										</div></center>
+									{% endif %}
+            
+									{% else %}
+										{# Show some example queries to run, maybe query syntax, something else? #}
+									{% endif %}
+						</div>
+									
+					</div>
+				</article>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<div class="container-fluid">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <img src="{% static '/images/smiley-2.gif' %} " width="42px" height="42">
+        </div>
+        <div>
+        <ul class="nav navbar-nav" role="tablist">
+            <li><a href="/manage_info/">管理主页</a></li>
+            <li><a href="{% url 'article:article_column' %}">论文管理</a></li>
+            <li><a href="{% url 'news:news_column' %}">新闻管理</a></li>
+            <li><a href="{% url 'image:list_images' %}">图片管理</a></li>
+            <li><a href="{% url 'pdf:list_pdfs' %}">PDF管理</a></li>            
+        </ul>
+        <ul class="nav navbar-nav navbar-right" sty="margin-right:10px">
+            <li><a href="/home/">网站首页</a></li>
+            <li><span>{{ user.username }}</span></li>
+            <li><a href="{% url 'account:user_logout' %}">登出</a></li>
+        </ul>
+        </div>
+    </nav>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>

@@ -1,0 +1,81 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+{% block title %}index{% endblock %}
+
+{% block content %}
+
+<div class="wrap-body">
+
+	<section id="container">
+		<div class="wrap-container">
+			<div class="zerogrid">
+					
+				{% for image in images %}					
+
+					<article class="archive-post" >
+						<div class=" wrap-post"><!--Start Post-->
+							<div class="flex-box">
+								
+								<div class="col-1-2">
+									<div class="box-image" ><img  src="{{image.image.url}}" alt="缩略图"  ></div>
+								</div>
+								
+								<div class="col-1-2">
+									<div class="box-text">
+										<a href="{{ image.title.get_url_path }}">
+										<div class="heading" id="test">
+											<h2>{{image.title}}<br></h2>
+										</div>
+										<div class="content">
+											<p><strong>简略介绍：</strong>{{image.title.article_writer}}</p>
+											<p style="color:black"><strong>标签：{{ image.title.article_tag.all | join:"," }}</strong></p>
+										</div>
+										</a>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</article>
+
+					
+				{% endfor %}	
+
+					
+
+
+	<div class="right">
+		<div class="pagination">
+			
+			<span class="step-links">
+					{% if page.has_previous %}
+						<strong><a href="?page={{ page.previous_page_number }}" style="color:white">前一页</a></strong>
+					{% endif %}
+    
+					<span class="current">
+						<strong>Page {{ page.number }} of {{ page.paginator.num_pages }}</strong>
+					</span>
+    
+					{% if page.has_next %}
+						<strong><a href="?page={{ page.next_page_number }}" style="color:white">后一页</a></strong>
+					{% endif %}
+			</span>
+			
+		</div>
+	</div>
+	
+			</div>
+		</div>
+	</section>
+
+</div>
+		
+
+
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/layer.js' %}"></script>
+
+
+{% endblock %}	
