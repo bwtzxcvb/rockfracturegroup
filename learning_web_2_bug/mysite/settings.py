@@ -151,7 +151,7 @@ EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 25
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = '1927552890@qq.com'
-with open('home/ubuntu/djang_rockfracturegroup/rockfracturegroup/my_password/email_host_password.txt','r') as f:
+with open('/home/ubuntu/djang_rockfracturegroup/rockfracturegroup/my_password/email_host_password.txt','r') as f:
 	EMAIL_HOST_PASSWORD = f.read().strip()
 DEFAULT_FROM_EMAIL = "1927552890@qq.com"
 
