@@ -9,7 +9,7 @@ django-mptt==0.10.0
 jieba==0.39
 Markdown==3.1.1
 pilkit==2.0
-Pillow==6.2.1
+Pillow==8.3.2
 pytz==2019.2
 redis==3.3.8
 regex==2019.8.19
